@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 builder.Services.AddTransient<BooksService>();
+builder.Services.AddTransient<AuthorsService>();
+builder.Services.AddTransient<PublishersService>();
 
 // Add services to the container.
 builder.Services.AddControllers();

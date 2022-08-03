@@ -15,8 +15,11 @@
 
         public string? Genre { get; set; }
 
-        public string? Author { get; set; }
         public string? CoverURL { get; set; }
+
+        public int PublisherID { get; set; }
+
+        public List<int> AuthorId { get; set; }
 
     }
 }
