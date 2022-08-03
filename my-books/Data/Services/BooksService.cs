@@ -64,12 +64,25 @@ namespace my_books.Data.Services
         }
 
 
-        public Book GetBookById(int BookId) {
+        public BookWithAuthorsVM GetBookById(int BookId) {
 
-           var singleBook =  _context.Books.FirstOrDefault(n => n.Id == BookId);
+            var _bookWithAuthors = _context.Books.Where(n => n.Id == BookId).Select(book => new BookWithAuthorsVM()
+            {
 
 
-            return singleBook;
+                Title = book.Title,
+                Description = book.Description,
+                IsRead = book.IsRead,
+                DateRead = book.IsRead ? book.DateRead.Value : null,
+                Rate = book.IsRead ? book.Rate.Value : null,
+                Genre = book.Genre,
+                CoverURL = book.CoverURL,
+                PublisherName = book.Publisher.Name,
+                AuthorNames = book.Book_Authors.Select(n => n.Author.FullName).ToList()
+            }).FirstOrDefault();
+
+
+            return _bookWithAuthors;
         
         
         }
